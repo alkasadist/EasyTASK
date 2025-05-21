@@ -4,6 +4,7 @@ import Features from './views/Features.vue'
 import Faq from './views/Faq.vue'
 import Login from './views/Login.vue'
 import Registration from './views/Registration.vue'
+import Tasks from './views/Tasks.vue'
 
 const routes = [
   { path: '/', component: Index },
@@ -11,6 +12,7 @@ const routes = [
   { path: '/faq', component: Faq },
   { path: '/login', component: Login },
   { path: '/registration', component: Registration },
+  { path: '/tasks', component: Tasks },
 ]
 
 const router = createRouter({

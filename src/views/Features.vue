@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <div class="bg-green-50 min-h-screen py-12">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div
-            v-for="(feature, index) in features"
-            :key="index"
-            class="bg-white p-6 rounded-lg shadow-md"
-          >
-            <h2 class="text-xl font-semibold text-green-700 mb-2">{{ feature.title }}</h2>
-            <p class="text-gray-700">{{ feature.description }}</p>
-          </div>
+  <div class="bg-green-50 min-h-screen py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          v-for="(feature, index) in features"
+          :key="index"
+          class="bg-white p-6 rounded-lg shadow-md"
+        >
+          <h2 class="text-xl font-semibold text-green-700 mb-2">{{ feature.title }}</h2>
+          <p class="text-gray-700">{{ feature.description }}</p>
         </div>
       </div>
     </div>
