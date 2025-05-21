@@ -23,7 +23,7 @@
           <ul id="completed-tasks" class="space-y-4"></ul>
         </div>
 
-        <div class="bg-green-200 p-6 rounded-lg shadow-md mt-10 max-w-xl mx-auto" id="formContainer">
+        <!-- <div class="bg-green-200 p-6 rounded-lg shadow-md mt-10 max-w-xl mx-auto" id="formContainer">
           <h3 class="text-xl font-semibold text-gray-900 mb-4">
             Encountered any problems? Contact our support:
           </h3>
@@ -44,28 +44,53 @@
               Send
             </button>
           </form>
-        </div>
+        </div> -->
 
         <div class="mt-10 text-center">
-          <button id="xhrBtn" class="text-red-600 hover:text-white bg-green-50 hover:bg-red-600 border-2 border-red-600 font-medium rounded-lg text-sm px-4 py-2">
+          <button @click="checkServer"
+          class="text-red-600 hover:text-white bg-green-50 hover:bg-red-600 border-2 border-red-600 
+          font-medium rounded-lg text-sm px-4 py-2">
             Check server
           </button>
-          <div id="xhrResult" class="mt-2 font-bold text-gray-800"></div>
+          <div class="mt-2 font-bold text-gray-800">
+            {{ xhrResult }}
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import { onMounted } from 'vue'
+<script setup>
+import { ref } from 'vue'
 
-export default {
-  name: 'Tasks',
-  mounted() {
-    import('../js/tasks.js')
-    import('../js/contactSupport.js')
-    import('../js/checkServer.js')
-  }
+const xhrResult = ref('')
+
+async function checkServer() {
+  console.log('checkServer called');
+
+  const xhr = new XMLHttpRequest();
+  /*
+  change the https://httpbin.org/get link to 
+  an invalid one in order to simulate an error
+  */
+  xhr.open('GET', 'https://httpbin.org/get');
+  xhr.onload = () => {
+    console.log('xhr loaded, status:', xhr.status);
+    if (xhr.status === 200) {
+      xhrResult.value = 'Test server is active';
+    } else {
+      xhrResult.value = `Error! Status: ${xhr.status}`;
+    }
+  };
+  xhr.onerror = () => {
+    console.log('xhr error');
+    xhrResult.value = 'Request error (check your connection)';
+  };
+  xhr.send();
 }
+
+
+
+
 </script>
