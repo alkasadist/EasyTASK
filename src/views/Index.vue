@@ -16,15 +16,14 @@
           <div class="mt-10 flex items-center justify-center gap-x-6">
             <router-link
               to="/registration"
-              class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-            >
+              class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
               Get Started
             </router-link>
             <router-link
               to="/features"
-              class="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Learn More<span aria-hidden="true">→</span>
+              class="text-sm font-semibold leading-6 text-gray-900">
+              Learn More
+              <span aria-hidden="true">→</span>
             </router-link>
           </div>
         </div>
@@ -51,13 +50,15 @@
               Minimalistic Design
             </dt>
             <dd class="mt-1 lg:mt-4 flex flex-auto flex-col text-base leading-7 text-green-200">
-              <p class="flex-auto">Sleek and simple design for easy use</p>
+              <p class="flex-auto">
+                Sleek and simple design for easy use
+              </p>
               <p class="mt-1 sm:mt-6">
                 <router-link
                   to="/features"
-                  class="text-sm font-semibold leading-6 text-white"
-                >
-                  Learn more <span aria-hidden="true">→</span>
+                  class="text-sm font-semibold leading-6 text-white">
+                  Learn more
+                  <span aria-hidden="true">→</span>
                 </router-link>
               </p>
             </dd>
@@ -67,13 +68,15 @@
               Task Organization
             </dt>
             <dd class="mt-1 lg:mt-4 flex flex-auto flex-col text-base leading-7 text-green-200">
-              <p class="flex-auto">Efficiently organize tasks with categories and priorities</p>
+              <p class="flex-auto">
+                Efficiently organize tasks with categories and priorities
+              </p>
               <p class="mt-1 sm:mt-6">
                 <router-link
                   to="/features"
-                  class="text-sm font-semibold leading-6 text-white"
-                >
-                  Learn more <span aria-hidden="true">→</span>
+                  class="text-sm font-semibold leading-6 text-white">
+                  Learn more
+                  <span aria-hidden="true">→</span>
                 </router-link>
               </p>
             </dd>
@@ -83,13 +86,15 @@
               Reminder Notifications
             </dt>
             <dd class="mt-1 lg:mt-4 flex flex-auto flex-col text-base leading-7 text-green-200">
-              <p class="flex-auto">Set reminders for important tasks to stay on track</p>
+              <p class="flex-auto">
+                Set reminders for important tasks to stay on track
+              </p>
               <p class="mt-1 sm:mt-6">
                 <router-link
                   to="/features"
-                  class="text-sm font-semibold leading-6 text-white"
-                >
-                  Learn more <span aria-hidden="true">→</span>
+                  class="text-sm font-semibold leading-6 text-white">
+                  Learn more
+                  <span aria-hidden="true">→</span>
                 </router-link>
               </p>
             </dd>
@@ -112,15 +117,14 @@
         <div class="mt-4 flex items-center justify-center gap-x-6">
           <router-link
             to="/registration"
-            class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-          >
+            class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
             Sign up
           </router-link>
           <router-link
             to="/features"
-            class="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Learn more<span aria-hidden="true">→</span>
+            class="text-sm font-semibold leading-6 text-gray-900">
+            Learn more
+            <span aria-hidden="true">→</span>
           </router-link>
         </div>
       </div>

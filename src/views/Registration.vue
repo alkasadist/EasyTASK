@@ -4,7 +4,9 @@
       <h2 class="text-2xl font-bold text-center text-green-600">Get started with EasyTASK</h2>
       <form @submit.prevent="register" class="mt-6">
         <div>
-          <label for="username" class="block text-gray-700">Username</label>
+          <label for="username" class="block text-gray-700">
+            Username
+          </label>
           <input
             id="username"
             v-model="username"
@@ -14,7 +16,9 @@
           >
         </div>
         <div class="mt-4">
-          <label for="password" class="block text-gray-700">Password</label>
+          <label for="password" class="block text-gray-700">
+            Password
+          </label>
           <input
             id="password"
             v-model="password"
@@ -25,8 +29,7 @@
         </div>
         <button
           type="submit"
-          class="w-full mt-6 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
-        >
+          class="w-full mt-6 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
           Sign Up
         </button>
       </form>

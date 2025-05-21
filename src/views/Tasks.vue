@@ -2,10 +2,14 @@
   <div id="app">
     <div class="bg-green-50">
       <div class="min-h-screen max-w-4xl mx-auto px-4 sm:py-10">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6">Your Tasks</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">
+          Your Tasks
+        </h2>
 
         <div class="bg-gray-100 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Pending Tasks</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">
+            Pending Tasks
+          </h3>
           <ul id="pending-tasks" class="space-y-4"></ul>
           <button id="add-task-btn" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             Add a task +
@@ -13,7 +17,9 @@
         </div>
 
         <div class="bg-gray-100 p-6 rounded-lg shadow-md mt-10">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Completed Tasks</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">
+            Completed Tasks
+          </h3>
           <ul id="completed-tasks" class="space-y-4"></ul>
         </div>
 

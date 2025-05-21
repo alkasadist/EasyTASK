@@ -1,7 +1,9 @@
 <template>
   <div class="bg-green-50 flex items-center justify-center min-h-screen p-4">
     <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-      <h2 class="text-2xl font-bold text-center text-green-600">EasyTASK</h2>
+      <h2 class="text-2xl font-bold text-center text-green-600">
+        EasyTASK
+      </h2>
       <form @submit.prevent="login" class="mt-6">
         <div>
           <label for="username" class="block text-gray-700">Username</label>
