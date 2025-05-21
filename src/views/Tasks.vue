@@ -23,11 +23,11 @@
           <ul id="completed-tasks" class="space-y-4"></ul>
         </div>
 
-        <!-- <div class="bg-green-200 p-6 rounded-lg shadow-md mt-10 max-w-xl mx-auto" id="formContainer">
+        <div class="bg-green-200 p-6 rounded-lg shadow-md mt-10 max-w-xl mx-auto" id="formContainer">
           <h3 class="text-xl font-semibold text-gray-900 mb-4">
             Encountered any problems? Contact our support:
           </h3>
-          <form id="taskForm">
+          <form id="taskForm" @submit.prevent="contactSupport">
             <div class="mb-4">
               <label for="taskTitle" class="block text-gray-700">
                 Title
@@ -44,7 +44,7 @@
               Send
             </button>
           </form>
-        </div> -->
+        </div>
 
         <div class="mt-10 text-center">
           <button @click="checkServer"
@@ -61,36 +61,55 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script>
+export default {
+  data() {
+    return {
+      taskTitle: '',
+      taskDescription: '',
+      xhrResult: '',
+    };
+  },
+  
+  methods: {
+    contactSupport() {
+      fetch('https://httpbin.org/post', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({
+          title: this.taskTitle,
+          body: this.taskDescription,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert('Form submitted successfully!');
+        })
+        .catch(() => {
+          alert('Error sending data to the server');
+        });
+    },
+    checkServer() {
+      console.log('checkServer called');
 
-const xhrResult = ref('')
-
-async function checkServer() {
-  console.log('checkServer called');
-
-  const xhr = new XMLHttpRequest();
-  /*
-  change the https://httpbin.org/get link to 
-  an invalid one in order to simulate an error
-  */
-  xhr.open('GET', 'https://httpbin.org/get');
-  xhr.onload = () => {
-    console.log('xhr loaded, status:', xhr.status);
-    if (xhr.status === 200) {
-      xhrResult.value = 'Test server is active';
-    } else {
-      xhrResult.value = `Error! Status: ${xhr.status}`;
-    }
-  };
-  xhr.onerror = () => {
-    console.log('xhr error');
-    xhrResult.value = 'Request error (check your connection)';
-  };
-  xhr.send();
-}
-
-
-
-
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://httpbin.org/get');
+      xhr.onload = () => {
+        console.log('xhr loaded, status:', xhr.status);
+        if (xhr.status === 200) {
+          this.xhrResult = 'Test server is active';
+        } else {
+          this.xhrResult = `Error! Status: ${xhr.status}`;
+        }
+      };
+      xhr.onerror = () => {
+        console.log('xhr error');
+        this.xhrResult = 'Request error (check your connection)';
+      };
+      xhr.send();
+    },
+  },
+};
 </script>
