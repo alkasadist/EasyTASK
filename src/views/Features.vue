@@ -62,13 +62,8 @@ export default {
       localStorage.removeItem('currentUser')
       this.isLoggedIn = false
       this.userName = ''
-      // если используешь Vue Router, делай this.$router.push('/'), иначе:
-      window.location.href = 'index.html'
+      this.$router.push('/')
     },
   },
 }
 </script>
-
-<style scoped>
-/* Можно добавить стили, если нужно */
-</style>

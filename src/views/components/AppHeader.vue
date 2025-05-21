@@ -38,7 +38,7 @@
             </div>
 
             <div
-              class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+              class="justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
               id="mobile-menu-2"
             >
               <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-12 lg:mt-0 ">

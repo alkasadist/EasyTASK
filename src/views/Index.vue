@@ -152,7 +152,3 @@ export default {
   }
 }
 </script>
-
-<style>
-/* Можно добавить CSS, если нужно */
-</style>

@@ -49,20 +49,13 @@ export default {
   },
   methods: {
     register() {
-      // Простейшая имитация регистрации — можно заменить на реальный API вызов
       if (this.username && this.password) {
-        // Например, сохраняем пользователя в localStorage (небезопасно, только для примера)
         localStorage.setItem('currentUser', this.username)
-        alert('Регистрация прошла успешно!')
-        this.$router.push('/')  // После регистрации редирект на главную
+        this.$router.push('/')
       } else {
-        alert('Пожалуйста, заполните все поля')
+        alert('Registration error')
       }
     }
   }
 }
 </script>
-
-<style scoped>
-/* Добавь локальные стили, если нужно */
-</style>

@@ -49,12 +49,9 @@ export default {
   },
   methods: {
     login() {
-      // Пример проверки: просто проверяем, что введено, и сохраняем в localStorage
       if (this.username && this.password) {
-        // В реальном приложении здесь запрос на сервер для аутентификации
         localStorage.setItem('currentUser', this.username)
-        alert('Login successful!')
-        this.$router.push('/') // Редирект на главную
+        this.$router.push('/')
       } else {
         alert('Please enter username and password')
       }
