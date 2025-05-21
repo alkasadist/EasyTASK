@@ -143,12 +143,5 @@ export default {
       userName: localStorage.getItem('currentUser') || ''
     }
   },
-  methods: {
-    logout() {
-      localStorage.removeItem('currentUser')
-      this.isLoggedIn = false
-      this.userName = ''
-    }
-  }
 }
 </script>

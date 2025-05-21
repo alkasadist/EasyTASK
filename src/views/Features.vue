@@ -57,13 +57,5 @@ export default {
       ],
     }
   },
-  methods: {
-    logout() {
-      localStorage.removeItem('currentUser')
-      this.isLoggedIn = false
-      this.userName = ''
-      this.$router.push('/')
-    },
-  },
 }
 </script>
