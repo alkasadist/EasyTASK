@@ -7,20 +7,47 @@
         </h2>
 
         <div class="bg-gray-100 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">
-            Pending Tasks
-          </h3>
-          <ul id="pending-tasks" class="space-y-4"></ul>
-          <button id="add-task-btn" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Pending Tasks</h3>
+          <ul class="space-y-4">
+            <li
+              v-for="(task, index) in notDone"
+              :key="'notdone-' + index"
+              class="flex justify-between items-center bg-white text-gray-800 p-4 rounded shadow"
+            >
+              <span>{{ task }}</span>
+              <button
+                @click="markAsDone(index)"
+                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+              >
+                Done
+              </button>
+            </li>
+          </ul>
+          <button
+            @click="addTask"
+            class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
             Add a task +
           </button>
         </div>
 
         <div class="bg-gray-100 p-6 rounded-lg shadow-md mt-10">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">
-            Completed Tasks
-          </h3>
-          <ul id="completed-tasks" class="space-y-4"></ul>
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Completed Tasks</h3>
+          <ul class="space-y-4">
+            <li
+              v-for="(task, index) in done"
+              :key="'done-' + index"
+              class="flex justify-between items-center bg-white p-4 rounded shadow"
+            >
+              <span class="line-through text-gray-500">{{ task }}</span>
+              <button
+                @click="deleteTask(index)"
+                class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+              >
+                Delete
+              </button>
+            </li>
+          </ul>
         </div>
 
         <div class="bg-green-200 p-6 rounded-lg shadow-md mt-10 max-w-xl mx-auto" id="formContainer">
@@ -65,12 +92,46 @@
 export default {
   data() {
     return {
+      currentUser: null,
+      userData: {
+        todos: {
+          notDone: [],
+          done: [],
+        }
+      },
       taskTitle: '',
       taskDescription: '',
       xhrResult: '',
     };
   },
   
+  computed: {
+    notDone() {
+      return this.userData.todos.notDone;
+    },
+    done() {
+      return this.userData.todos.done;
+    },
+  },
+
+  mounted() {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+      alert('Please login first.');
+      window.location.href = 'login.html';
+      return;
+    }
+    
+    this.currentUser = currentUser;
+
+    const storedData = localStorage.getItem(currentUser);
+    if (storedData) {
+      this.userData = JSON.parse(storedData);
+    } else {
+      this.saveUserData(); // создать пустые задачи, если данных нет
+    }
+  },
+
   methods: {
     contactSupport() {
       fetch('https://httpbin.org/post', {
@@ -109,6 +170,28 @@ export default {
         this.xhrResult = 'Request error (check your connection)';
       };
       xhr.send();
+    },
+
+    // TASKS MANAGEMENT METHODS
+    saveUserData() {
+      localStorage.setItem(this.currentUser, JSON.stringify(this.userData));
+    },
+    markAsDone(index) {
+      const task = this.notDone[index];
+      this.userData.todos.notDone.splice(index, 1);
+      this.userData.todos.done.push(task);
+      this.saveUserData();
+    },
+    deleteTask(index) {
+      this.userData.todos.done.splice(index, 1);
+      this.saveUserData();
+    },
+    addTask() {
+      const task = prompt('Enter your task:');
+      if (task && task.trim()) {
+        this.userData.todos.notDone.push(task.trim());
+        this.saveUserData();
+      }
     },
   },
 };
