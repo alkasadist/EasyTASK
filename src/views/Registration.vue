@@ -54,7 +54,7 @@ export default {
     register() {
       if (this.username && this.password) {
         localStorage.setItem('currentUser', this.username)
-        this.$router.push('/')
+        this.$router.push('/tasks')
       } else {
         alert('Registration error')
       }

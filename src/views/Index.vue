@@ -16,7 +16,8 @@
           <div class="mt-10 flex items-center justify-center gap-x-6">
             <router-link
               to="/registration"
-              class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+              class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700 
+              focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
               Get Started
             </router-link>
             <router-link
@@ -117,7 +118,8 @@
         <div class="mt-4 flex items-center justify-center gap-x-6">
           <router-link
             to="/registration"
-            class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+            class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700
+            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
             Sign up
           </router-link>
           <router-link
