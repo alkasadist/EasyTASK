@@ -5,8 +5,7 @@
         <div
           v-for="(feature, index) in features"
           :key="index"
-          class="bg-white p-6 rounded-lg shadow-md"
-        >
+          class="bg-white p-6 rounded-lg shadow-md">
           <h2 class="text-xl font-semibold text-green-700 mb-2">
             {{ feature.title }}
           </h2>

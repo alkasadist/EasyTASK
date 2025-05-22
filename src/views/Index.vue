@@ -16,7 +16,9 @@
           <div class="mt-10 flex items-center justify-center gap-x-6">
             <router-link
               to="/registration"
-              class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700 
+              class="rounded-md px-3.5 py-2.5 shadow-sm
+              text-sm font-semibold text-white 
+              bg-green-600 hover:bg-green-700 
               focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
               Get Started
             </router-link>
@@ -35,22 +37,26 @@
   <div class="bg-green-600 py-5 sm:py-10">
     <div class="mx-auto max-w-7xl px-5 lg:px-8">
       <div class="mx-auto max-w-2xl lg:text-center">
-        <h2 class="text-base font-semibold leading-7 text-green-200">Stay Organized</h2>
+        <h2 class="text-base font-semibold leading-7 text-green-200">
+          Stay Organized
+        </h2>
         <p class="mt-2 text-xl font-bold tracking-tight text-white sm:text-4xl">
           Effortlessly manage your tasks
         </p>
         <p class="mt-1 sm:mt-6 text-lg leading-8 text-green-200">
-          Keep track of your to-dos with our minimalistic and user-friendly design, task organization
-          features, and reminder notifications.
+          Keep track of your to-dos with our minimalistic and user-friendly design,
+          task organization features, and reminder notifications.
         </p>
       </div>
       <div class="mx-auto max-w-2xl mt-6 lg:mt-20 lg:max-w-none">
         <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-6 lg:max-w-none lg:grid-cols-3">
           <div class="flex flex-col">
-            <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-white">
+            <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 
+            text-white">
               Minimalistic Design
             </dt>
-            <dd class="mt-1 lg:mt-4 flex flex-auto flex-col text-base leading-7 text-green-200">
+            <dd class="mt-1 lg:mt-4 flex flex-auto flex-col text-base leading-7 
+            text-green-200">
               <p class="flex-auto">
                 Sleek and simple design for easy use
               </p>
@@ -65,10 +71,12 @@
             </dd>
           </div>
           <div class="flex flex-col">
-            <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-white">
+            <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 
+            text-white">
               Task Organization
             </dt>
-            <dd class="mt-1 lg:mt-4 flex flex-auto flex-col text-base leading-7 text-green-200">
+            <dd class="mt-1 lg:mt-4 flex flex-auto flex-col text-base leading-7 
+            text-green-200">
               <p class="flex-auto">
                 Efficiently organize tasks with categories and priorities
               </p>
@@ -83,10 +91,12 @@
             </dd>
           </div>
           <div class="flex flex-col">
-            <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-white">
+            <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 
+            text-white">
               Reminder Notifications
             </dt>
-            <dd class="mt-1 lg:mt-4 flex flex-auto flex-col text-base leading-7 text-green-200">
+            <dd class="mt-1 lg:mt-4 flex flex-auto flex-col text-base leading-7 
+            text-green-200">
               <p class="flex-auto">
                 Set reminders for important tasks to stay on track
               </p>
@@ -118,7 +128,9 @@
         <div class="mt-4 flex items-center justify-center gap-x-6">
           <router-link
             to="/registration"
-            class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700
+            class="rounded-md px-3.5 py-2.5 
+            text-sm font-semibold text-white shadow-sm
+            bg-green-600 hover:bg-green-700
             focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
             Sign up
           </router-link>

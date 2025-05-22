@@ -12,21 +12,21 @@
             <li
               v-for="(task, index) in notDone"
               :key="'notdone-' + index"
-              class="flex justify-between items-center bg-white text-gray-800 p-4 rounded shadow"
-            >
+              class="flex justify-between items-center bg-white text-gray-800 p-4 
+              rounded shadow">
               <span>{{ task }}</span>
               <button
                 @click="markAsDone(index)"
-                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-              >
+                class="text-white px-4 py-2 rounded 
+                bg-green-600 hover:bg-green-700">
                 Done
               </button>
             </li>
           </ul>
           <button
             @click="addTask"
-            class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
+            class="mt-4 text-white px-4 py-2 rounded 
+            bg-blue-600 hover:bg-blue-700">
             Add a task +
           </button>
         </div>
@@ -37,13 +37,11 @@
             <li
               v-for="(task, index) in done"
               :key="'done-' + index"
-              class="flex justify-between items-center bg-white p-4 rounded shadow"
-            >
+              class="flex justify-between items-center bg-white p-4 rounded shadow">
               <span class="line-through text-gray-500">{{ task }}</span>
               <button
                 @click="deleteTask(index)"
-                class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-              >
+                class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
                 Delete
               </button>
             </li>
@@ -65,9 +63,13 @@
               <label for="taskDescription" class="block text-gray-700">
                 Description
               </label>
-              <textarea id="taskDescription" class="border border-gray-300 p-2 w-full rounded" required></textarea>
+              <textarea id="taskDescription" class="border border-gray-300 p-2 w-full rounded" required>
+              </textarea>
             </div>
-            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+            <button type="submit" class="
+            px-4 py-2 rounded
+            bg-green-600 hover:bg-green-700
+            text-white">
               Send
             </button>
           </form>
@@ -75,7 +77,9 @@
 
         <div class="mt-10 text-center">
           <button @click="checkServer"
-          class="text-red-600 hover:text-white bg-green-50 hover:bg-red-600 border-2 border-red-600 
+          class="text-red-600 hover:text-white 
+          bg-green-50 hover:bg-red-600 
+          border-2 border-red-600 
           font-medium rounded-lg text-sm px-4 py-2">
             Check server
           </button>

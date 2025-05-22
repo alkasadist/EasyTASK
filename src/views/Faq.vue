@@ -1,7 +1,9 @@
 <template>
   <div class="bg-green-50 min-h-screen py-10">
     <div class="container mx-auto px-4 lg:px-6 max-w-4xl">
-      <h1 class="text-4xl font-bold text-gray-900 mb-6">FAQ — Frequently Asked Questions</h1>
+      <h1 class="text-4xl font-bold text-gray-900 mb-6">
+        FAQ — Frequently Asked Questions
+      </h1>
       <div class="space-y-6">
         <section v-for="(item, index) in faqItems" :key="index">
           <h2 class="text-2xl font-semibold text-green-700 mb-2">
