@@ -1,34 +1,14 @@
 <template>
   <div class="bg-green-50">
     <div class="relative isolate px-5 sm:pt-14 lg:px-8">
-      <div
-        class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-        aria-hidden="true"
-      ></div>
       <div class="mx-auto max-w-2xl py-5 lg:py-10">
         <div class="text-center">
           <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Minimalistic To-Do List
           </h1>
           <p class="mt-6 text-lg leading-8 text-gray-600">
-            Stay organized and productive with our simple and efficient to-do list app.
+            Stay organized and productive with my simple and efficient to-do list app.
           </p>
-          <div class="mt-10 flex items-center justify-center gap-x-6">
-            <router-link
-              to="/registration"
-              class="rounded-md px-3.5 py-2.5 shadow-sm
-              text-sm font-semibold text-white 
-              bg-green-600 hover:bg-green-700 
-              focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
-              Get Started
-            </router-link>
-            <router-link
-              to="/features"
-              class="text-sm font-semibold leading-6 text-gray-900">
-              Learn More
-              <span aria-hidden="true">→</span>
-            </router-link>
-          </div>
         </div>
       </div>
     </div>
@@ -64,8 +44,7 @@
                 <router-link
                   to="/features"
                   class="text-sm font-semibold leading-6 text-white">
-                  Learn more
-                  <span aria-hidden="true">→</span>
+                  Learn more →
                 </router-link>
               </p>
             </dd>
@@ -84,8 +63,7 @@
                 <router-link
                   to="/features"
                   class="text-sm font-semibold leading-6 text-white">
-                  Learn more
-                  <span aria-hidden="true">→</span>
+                  Learn more →
                 </router-link>
               </p>
             </dd>
@@ -104,8 +82,7 @@
                 <router-link
                   to="/features"
                   class="text-sm font-semibold leading-6 text-white">
-                  Learn more
-                  <span aria-hidden="true">→</span>
+                  Learn more →
                 </router-link>
               </p>
             </dd>
@@ -117,15 +94,14 @@
 
   <div class="bg-green-50">
     <div class="px-5 py-5 sm:px-6 lg:px-10">
-      <div class="mx-auto max-w-2xl text-center">
+      <div class="py-5 mx-auto max-w-2xl text-center">
         <h2 class="text-2xl font-bold tracking-tight text-gray-800 sm:text-4xl">
-          <br />
           Start checking off tasks with ease
         </h2>
         <p class="mx-auto mt-4 max-w-xl text-lg leading-8 text-gray-600">
           Sign up now and experience the simplicity of our to-do list project.
         </p>
-        <div class="mt-4 flex items-center justify-center gap-x-6">
+        <div class="py-5 mt-4 flex items-center justify-center gap-x-6">
           <router-link
             to="/registration"
             class="rounded-md px-3.5 py-2.5 
@@ -137,15 +113,13 @@
           <router-link
             to="/features"
             class="text-sm font-semibold leading-6 text-gray-900">
-            Learn more
-            <span aria-hidden="true">→</span>
+            Learn more →
           </router-link>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 import AppHeader from './components/AppHeader.vue'

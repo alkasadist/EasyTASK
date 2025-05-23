@@ -7,14 +7,18 @@
         </h2>
 
         <div class="bg-gray-100 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Pending Tasks</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">
+            Pending Tasks
+          </h3>
           <ul class="space-y-4">
             <li
               v-for="(task, index) in notDone"
               :key="'notdone-' + index"
               class="flex justify-between items-center bg-white text-gray-800 p-4 
               rounded shadow">
-              <span>{{ task }}</span>
+              <span>
+                {{ task }}
+              </span>
               <button
                 @click="markAsDone(index)"
                 class="text-white px-4 py-2 rounded 
@@ -32,13 +36,17 @@
         </div>
 
         <div class="bg-gray-100 p-6 rounded-lg shadow-md mt-10">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Completed Tasks</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">
+            Completed Tasks
+          </h3>
           <ul class="space-y-4">
             <li
               v-for="(task, index) in done"
               :key="'done-' + index"
               class="flex justify-between items-center bg-white p-4 rounded shadow">
-              <span class="line-through text-gray-500">{{ task }}</span>
+              <span class="line-through text-gray-500">
+                {{ task }}
+              </span>
               <button
                 @click="deleteTask(index)"
                 class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
