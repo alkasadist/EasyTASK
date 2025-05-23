@@ -71,11 +71,10 @@
               <label for="taskDescription" class="block text-gray-700">
                 Description
               </label>
-              <textarea id="taskDescription" class="border border-gray-300 p-2 w-full rounded" required>
-              </textarea>
+              <textarea id="taskDescription" class="border border-gray-300 p-2 w-full rounded" required />
             </div>
-            <button type="submit" class="
-            px-4 py-2 rounded
+            <button type="submit"
+            class="px-4 py-2 rounded
             bg-green-600 hover:bg-green-700
             text-white">
               Send
@@ -95,6 +94,7 @@
             {{ xhrResult }}
           </div>
         </div>
+        
       </div>
     </div>
   </div>
