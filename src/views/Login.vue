@@ -61,6 +61,7 @@ export default {
     login() {
       if (this.username && this.password) {
         localStorage.setItem('currentUser', this.username)
+        this.$emit('login-success', this.username);
         this.$router.push('/tasks')
       } else {
         alert('Please enter username and password')
