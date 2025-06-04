@@ -2,9 +2,6 @@
   <div id="app">
     <div class="bg-green-50">
       <div class="min-h-screen max-w-4xl mx-auto px-4 sm:py-10">
-        <!-- <h2 class="text-3xl font-bold text-gray-800 mb-6">
-          Your Tasks
-        </h2> -->
 
         <div class="bg-gray-100 p-6 rounded-lg shadow-md">
           <div class="flex justify-between items-center mb-4">
@@ -15,10 +12,10 @@
               @click="addTask"
               class="text-white px-4 py-2 rounded 
               bg-blue-600 hover:bg-blue-700">
-              Add a task +
+              Add task +
             </button>
           </div>
-          
+
           <ul class="space-y-4">
             <!-- Pending Tasks -->
             <li
@@ -102,7 +99,7 @@
             {{ xhrResult }}
           </div>
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -124,7 +121,7 @@ export default {
       xhrResult: '',
     };
   },
-  
+
   computed: {
     notDone() {
       return this.userData.todos.notDone;
@@ -141,7 +138,7 @@ export default {
       window.location.href = 'login.html';
       return;
     }
-    
+
     this.currentUser = currentUser;
 
     const storedData = localStorage.getItem(currentUser);
