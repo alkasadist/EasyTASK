@@ -8,15 +8,6 @@
             <h3 class="text-2xl font-semibold text-gray-900">
               Your Tasks
             </h3>
-            <button
-              @click="addTask"
-              class="flex items-center text-white px-4 py-2 rounded 
-              bg-blue-600 hover:bg-blue-700">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-              </svg>
-              Add
-            </button>
           </div>
 
           <ul class="space-y-4">
@@ -40,13 +31,23 @@
                 </button>
               </div>
             </li>
+            
+            <button
+              @click="addTask"
+              class="flex items-center text-white px-4 py-2 rounded 
+              bg-blue-600 hover:bg-blue-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+              </svg>
+              Add
+            </button>
 
             <!-- Completed Tasks -->
             <li
               v-for="(task, index) in done"
               :key="'done-' + index"
               class="flex justify-between items-center bg-white p-4 rounded shadow">
-              <span class="line-through text-gray-500">
+              <span class="line-through text-gray-400">
                 {{ task }}
               </span>
               <div class="flex space-x-2">
