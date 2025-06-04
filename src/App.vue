@@ -27,7 +27,7 @@ export default {
       this.isLoggedIn = false;
       this.userName = '';
       localStorage.removeItem("currentUser"); // если используешь
-      this.$router.push('/login');
+      this.$router.push('/');
     }
   },
   mounted() {

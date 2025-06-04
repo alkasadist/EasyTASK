@@ -2,15 +2,25 @@
   <div id="app">
     <div class="bg-green-50">
       <div class="min-h-screen max-w-4xl mx-auto px-4 sm:py-10">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6">
+        <!-- <h2 class="text-3xl font-bold text-gray-800 mb-6">
           Your Tasks
-        </h2>
+        </h2> -->
 
         <div class="bg-gray-100 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">
-            Pending Tasks
-          </h3>
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-2xl font-semibold text-gray-900">
+              Your Tasks
+            </h3>
+            <button
+              @click="addTask"
+              class="text-white px-4 py-2 rounded 
+              bg-blue-600 hover:bg-blue-700">
+              Add a task +
+            </button>
+          </div>
+          
           <ul class="space-y-4">
+            <!-- Pending Tasks -->
             <li
               v-for="(task, index) in notDone"
               :key="'notdone-' + index"
@@ -19,27 +29,17 @@
               <span>
                 {{ task }}
               </span>
-              <button
-                @click="markAsDone(index)"
-                class="text-white px-4 py-2 rounded 
-                bg-green-600 hover:bg-green-700">
-                Done
-              </button>
+              <div class="flex space-x-2">
+                <button
+                  @click="markAsDone(index)"
+                  class="text-white px-4 py-2 rounded 
+                  bg-green-600 hover:bg-green-700">
+                  Done
+                </button>
+              </div>
             </li>
-          </ul>
-          <button
-            @click="addTask"
-            class="mt-4 text-white px-4 py-2 rounded 
-            bg-blue-600 hover:bg-blue-700">
-            Add a task +
-          </button>
-        </div>
 
-        <div class="bg-gray-100 p-6 rounded-lg shadow-md mt-10">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">
-            Completed Tasks
-          </h3>
-          <ul class="space-y-4">
+            <!-- Completed Tasks -->
             <li
               v-for="(task, index) in done"
               :key="'done-' + index"
@@ -47,11 +47,19 @@
               <span class="line-through text-gray-500">
                 {{ task }}
               </span>
-              <button
-                @click="deleteTask(index)"
-                class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-                Delete
-              </button>
+              <div class="flex space-x-2">
+                <button
+                  @click="restoreTask(index)"
+                  class="text-white px-4 py-2 rounded 
+                  bg-blue-600 hover:bg-blue-700">
+                  Restore
+                </button>
+                <button
+                  @click="deleteTask(index)"
+                  class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+                  Delete
+                </button>
+              </div>
             </li>
           </ul>
         </div>
@@ -65,13 +73,13 @@
               <label for="taskTitle" class="block text-gray-700">
                 Title
               </label>
-              <input type="text" id="taskTitle" class="border border-gray-300 p-2 w-full rounded" required />
+              <input v-model="taskTitle" type="text" id="taskTitle" class="border border-gray-300 p-2 w-full rounded" required />
             </div>
             <div class="mb-4">
               <label for="taskDescription" class="block text-gray-700">
                 Description
               </label>
-              <textarea id="taskDescription" class="border border-gray-300 p-2 w-full rounded" required />
+              <textarea v-model="taskDescription" id="taskDescription" class="border border-gray-300 p-2 w-full rounded" required />
             </div>
             <button type="submit"
             class="px-4 py-2 rounded
@@ -159,6 +167,8 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           alert('Form submitted successfully!');
+          this.taskTitle = '';
+          this.taskDescription = '';
         })
         .catch(() => {
           alert('Error sending data to the server');
@@ -196,6 +206,12 @@ export default {
     },
     deleteTask(index) {
       this.userData.todos.done.splice(index, 1);
+      this.saveUserData();
+    },
+    restoreTask(index) {
+      const task = this.done[index];
+      this.userData.todos.done.splice(index, 1);
+      this.userData.todos.notDone.push(task);
       this.saveUserData();
     },
     addTask() {
