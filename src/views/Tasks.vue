@@ -18,7 +18,7 @@
               Add
             </button>
           </div>
-          
+
           <ul class="space-y-4">
             <!-- Pending Tasks -->
             <li
@@ -155,7 +155,7 @@ export default {
     if (storedData) {
       this.userData = JSON.parse(storedData);
     } else {
-      this.saveUserData(); // создать пустые задачи, если данных нет
+      this.saveUserData();
     }
   },
 
