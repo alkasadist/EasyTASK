@@ -14,6 +14,33 @@
           </p>
         </section>
       </div>
+
+      <div class="bg-green-200 p-6 rounded-lg shadow-md mt-10 max-w-xl mx-auto" id="formContainer">
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">
+          Encountered any problems? Contact our support:
+        </h3>
+        <form id="taskForm" @submit.prevent="contactSupport">
+          <div class="mb-4">
+            <label for="taskTitle" class="block text-gray-700">
+              Title
+            </label>
+            <input v-model="taskTitle" type="text" id="taskTitle" class="border border-gray-300 p-2 w-full rounded" required />
+          </div>
+          <div class="mb-4">
+            <label for="taskDescription" class="block text-gray-700">
+              Description
+            </label>
+            <textarea v-model="taskDescription" id="taskDescription" class="border border-gray-300 p-2 w-full rounded" required />
+          </div>
+          <button type="submit"
+          class="px-4 py-2 rounded
+          bg-green-600 hover:bg-green-700
+          text-white">
+            Send
+          </button>
+        </form>
+      </div>
+
     </div>
   </div>
 </template>
@@ -40,12 +67,31 @@ export default {
           question: "Can I access EasyTASK on mobile?",
           answer: "Yes! EasyTASK is fully responsive and works on all modern mobile browsers."
         },
-        {
-          question: "How can I contact support?",
-          answer: "You can reach out to us via the contact form on the \"About EasyTASK\" page (coming soon)."
-        }
       ]
     }
+  },
+  methods: {
+    contactSupport() {
+      fetch('https://httpbin.org/post', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({
+          title: this.taskTitle,
+          body: this.taskDescription,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert('Form submitted successfully!');
+          this.taskTitle = '';
+          this.taskDescription = '';
+        })
+        .catch(() => {
+          alert('Error sending data to the server');
+        });
+    },
   }
 }
 </script>
