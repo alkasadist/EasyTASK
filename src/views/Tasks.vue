@@ -45,6 +45,9 @@
           <div class="flex justify-between items-center mb-4">
             <h3 class="text-2xl font-semibold text-gray-900">
               {{ group.name }}
+              <span class="ml-2 text-xl text-gray-500">
+                ({{ group.todos.notDone.length }} pending)
+              </span>
             </h3>
             <div class="flex space-x-2">
               <button 
