@@ -8,68 +8,80 @@
             <h3 class="text-2xl font-semibold text-gray-900">
               Your Tasks
             </h3>
+            <button 
+              @click="toggleTasksVisibility"
+              class="text-gray-600 p-2 rounded-md 
+              hover:text-gray-700 hover:bg-gray-200 focus:outline-none"
+              :aria-expanded="!tasksCollapsed">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  :d="tasksCollapsed ? 'm19.5 8.25-7.5 7.5-7.5-7.5' : 'M5 15l7-7 7 7'" />
+              </svg>
+            </button>
           </div>
 
-          <ul class="space-y-4">
-            <!-- Pending Tasks -->
-            <li
-              v-for="(task, index) in notDone"
-              :key="'notdone-' + index"
-              class="flex justify-between items-center bg-white text-gray-800 p-4 
-              rounded shadow">
-              <span>
-                {{ task }}
-              </span>
-              <div class="flex space-x-2">
-                <button
-                  @click="markAsDone(index)"
-                  class="p-2 rounded-md text-green-600 hover:bg-green-100"
-                  title="Mark as done">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
-                </button>
-              </div>
-            </li>
-            
-            <button
-              @click="addTask"
-              class="flex items-center text-white px-4 py-2 rounded 
-              bg-blue-600 hover:bg-blue-700">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-              </svg>
-              Add
-            </button>
+          <div v-if="!tasksCollapsed">
+            <ul class="space-y-4">
+              <!-- Pending Tasks -->
+              <li
+                v-for="(task, index) in notDone"
+                :key="'notdone-' + index"
+                class="flex justify-between items-center bg-white text-gray-800 p-4 
+                rounded shadow">
+                <span>
+                  {{ task }}
+                </span>
+                <div class="flex space-x-2">
+                  <button
+                    @click="markAsDone(index)"
+                    class="p-2 rounded-md text-green-600 hover:bg-green-100"
+                    title="Mark as done">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
+              </li>
+              
+              <button
+                @click="addTask"
+                class="flex items-center text-white px-4 py-2 rounded 
+                bg-blue-600 hover:bg-blue-700 mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+                Add
+              </button>
 
-            <!-- Completed Tasks -->
-            <li
-              v-for="(task, index) in done"
-              :key="'done-' + index"
-              class="flex justify-between items-center bg-white p-4 rounded shadow">
-              <span class="line-through text-gray-400">
-                {{ task }}
-              </span>
-              <div class="flex space-x-2">
-                <button
-                  @click="restoreTask(index)"
-                  class="p-2 rounded-md text-blue-600 hover:bg-blue-100"
-                  title="Restore task">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M7.707 3.293a1 1 0 010 1.414L5.414 7H11a7 7 0 017 7v2a1 1 0 11-2 0v-2a5 5 0 00-5-5H5.414l2.293 2.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
-                </button>
-                <button
-                  @click="deleteTask(index)"
-                  class="p-2 rounded-md text-red-600 hover:bg-red-100"
-                  title="Delete task">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                  </svg>
-                </button>
-              </div>
-            </li>
-          </ul>
+              <!-- Completed Tasks -->
+              <li
+                v-for="(task, index) in done"
+                :key="'done-' + index"
+                class="flex justify-between items-center bg-white p-4 rounded shadow">
+                <span class="line-through text-gray-400">
+                  {{ task }}
+                </span>
+                <div class="flex space-x-2">
+                  <button
+                    @click="restoreTask(index)"
+                    class="p-2 rounded-md text-blue-600 hover:bg-blue-100"
+                    title="Restore task">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M7.707 3.293a1 1 0 010 1.414L5.414 7H11a7 7 0 017 7v2a1 1 0 11-2 0v-2a5 5 0 00-5-5H5.414l2.293 2.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                  <button
+                    @click="deleteTask(index)"
+                    class="p-2 rounded-md text-red-600 hover:bg-red-100"
+                    title="Delete task">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div class="mt-10 text-center">
@@ -104,6 +116,7 @@ export default {
       taskTitle: '',
       taskDescription: '',
       xhrResult: '',
+      tasksCollapsed: false
     };
   },
 
@@ -135,6 +148,10 @@ export default {
   },
 
   methods: {
+    toggleTasksVisibility() {
+      this.tasksCollapsed = !this.tasksCollapsed;
+    },
+    
     checkServer() {
       console.log('checkServer called');
 
