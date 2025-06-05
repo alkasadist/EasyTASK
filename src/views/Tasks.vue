@@ -3,37 +3,80 @@
     <div class="bg-green-50">
       <div class="min-h-screen max-w-4xl mx-auto px-4 sm:py-10">
 
-        <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+        <!-- Кнопка добавления новой группы -->
+        <button
+          @click="showAddGroupModal = true"
+          class="flex items-center mb-6 text-white px-4 py-2 rounded 
+          bg-indigo-600 hover:bg-indigo-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+          </svg>
+          Add Group
+        </button>
+
+        <!-- Модальное окно для добавления группы -->
+        <div v-if="showAddGroupModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div class="bg-white p-6 rounded-lg max-w-sm w-full">
+            <h3 class="text-lg font-medium mb-4">New Task Group</h3>
+            <input 
+              v-model="newGroupName"
+              type="text" 
+              placeholder="Group name"
+              class="border p-2 w-full mb-4"
+              @keyup.enter="addNewGroup">
+            <div class="flex justify-end space-x-2">
+              <button @click="showAddGroupModal = false" class="px-4 py-2 border rounded">Cancel</button>
+              <button @click="addNewGroup" class="px-4 py-2 bg-indigo-500 text-white rounded">Add</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Список групп задач -->
+        <div 
+          v-for="(group, groupIndex) in taskGroups" 
+          :key="'group-'+groupIndex"
+          class="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
+          
+          <!-- Заголовок группы -->
           <div class="flex justify-between items-center mb-4">
             <h3 class="text-2xl font-semibold text-gray-900">
-              Your Tasks
+              {{ group.name }}
             </h3>
-            <button 
-              @click="toggleTasksVisibility"
-              class="text-gray-600 p-2 rounded-md 
-              hover:text-gray-700 hover:bg-gray-200 focus:outline-none"
-              :aria-expanded="!tasksCollapsed">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                  :d="tasksCollapsed ? 'm19.5 8.25-7.5 7.5-7.5-7.5' : 'M5 15l7-7 7 7'" />
-              </svg>
-            </button>
+            <div class="flex space-x-2">
+              <button 
+                @click="toggleGroupVisibility(groupIndex)"
+                class="text-gray-600 p-2 rounded-md 
+                hover:text-gray-700 hover:bg-gray-200 focus:outline-none"
+                :aria-expanded="!group.collapsed">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    :d="group.collapsed ? 'm19.5 8.25-7.5 7.5-7.5-7.5' : 'M5 15l7-7 7 7'" />
+                </svg>
+              </button>
+              <button
+                @click="removeGroup(groupIndex)"
+                class="text-gray-600 p-2 rounded-md 
+                hover:text-red-600 hover:bg-gray-200 focus:outline-none"
+                title="Delete group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          <div v-if="!tasksCollapsed">
+          <!-- Содержимое группы -->
+          <div v-if="!group.collapsed">
             <ul class="space-y-4">
-              <!-- Pending Tasks -->
+              <!-- Невыполненные задачи -->
               <li
-                v-for="(task, index) in notDone"
-                :key="'notdone-' + index"
-                class="flex justify-between items-center bg-white text-gray-800 p-4 
-                rounded shadow">
-                <span>
-                  {{ task }}
-                </span>
+                v-for="(task, index) in group.todos.notDone"
+                :key="'notdone-'+groupIndex+'-'+index"
+                class="flex justify-between items-center bg-white text-gray-800 p-4 rounded shadow">
+                <span>{{ task }}</span>
                 <div class="flex space-x-2">
                   <button
-                    @click="markAsDone(index)"
+                    @click="markAsDone(groupIndex, index)"
                     class="p-2 rounded-md text-green-600 hover:bg-green-100"
                     title="Mark as done">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
@@ -43,27 +86,26 @@
                 </div>
               </li>
               
+              <!-- Кнопка добавления задачи -->
               <button
-                @click="addTask"
+                @click="addTask(groupIndex)"
                 class="flex items-center text-white px-4 py-2 rounded 
                 bg-blue-600 hover:bg-blue-700 mt-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                 </svg>
-                Add
+                Add Task
               </button>
 
-              <!-- Completed Tasks -->
+              <!-- Выполненные задачи -->
               <li
-                v-for="(task, index) in done"
-                :key="'done-' + index"
+                v-for="(task, index) in group.todos.done"
+                :key="'done-'+groupIndex+'-'+index"
                 class="flex justify-between items-center bg-white p-4 rounded shadow">
-                <span class="line-through text-gray-400">
-                  {{ task }}
-                </span>
+                <span class="line-through text-gray-400">{{ task }}</span>
                 <div class="flex space-x-2">
                   <button
-                    @click="restoreTask(index)"
+                    @click="restoreTask(groupIndex, index)"
                     class="p-2 rounded-md text-blue-600 hover:bg-blue-100"
                     title="Restore task">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6" viewBox="0 0 20 20" fill="currentColor">
@@ -71,7 +113,7 @@
                     </svg>
                   </button>
                   <button
-                    @click="deleteTask(index)"
+                    @click="deleteTask(groupIndex, index)"
                     class="p-2 rounded-md text-red-600 hover:bg-red-100"
                     title="Delete task">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -84,6 +126,7 @@
           </div>
         </div>
 
+        <!-- Проверка сервера -->
         <div class="mt-10 text-center">
           <button @click="checkServer"
           class="text-red-600 hover:text-white 
@@ -107,26 +150,13 @@ export default {
   data() {
     return {
       currentUser: null,
-      userData: {
-        todos: {
-          notDone: [],
-          done: [],
-        }
-      },
+      taskGroups: [],
+      showAddGroupModal: false,
+      newGroupName: '',
       taskTitle: '',
       taskDescription: '',
-      xhrResult: '',
-      tasksCollapsed: false
+      xhrResult: ''
     };
-  },
-
-  computed: {
-    notDone() {
-      return this.userData.todos.notDone;
-    },
-    done() {
-      return this.userData.todos.done;
-    },
   },
 
   mounted() {
@@ -138,67 +168,102 @@ export default {
     }
 
     this.currentUser = currentUser;
-
-    const storedData = localStorage.getItem(currentUser);
-    if (storedData) {
-      this.userData = JSON.parse(storedData);
-    } else {
-      this.saveUserData();
-    }
+    this.loadTaskGroups();
   },
 
   methods: {
-    toggleTasksVisibility() {
-      this.tasksCollapsed = !this.tasksCollapsed;
+    loadTaskGroups() {
+      const storedData = localStorage.getItem(this.currentUser);
+      if (storedData) {
+        this.taskGroups = JSON.parse(storedData);
+        // Если данные в старом формате, преобразуем их
+        if (!Array.isArray(this.taskGroups)) {
+          this.taskGroups = [{
+            name: 'Your Tasks',
+            collapsed: false,
+            todos: this.taskGroups.todos || { notDone: [], done: [] }
+          }];
+        }
+      } else {
+        // Создаем первую группу по умолчанию
+        this.taskGroups = [{
+          name: 'Your Tasks',
+          collapsed: false,
+          todos: { notDone: [], done: [] }
+        }];
+        this.saveTaskGroups();
+      }
     },
-    
-    checkServer() {
-      console.log('checkServer called');
 
+    saveTaskGroups() {
+      localStorage.setItem(this.currentUser, JSON.stringify(this.taskGroups));
+    },
+
+    addNewGroup() {
+      if (this.newGroupName.trim()) {
+        this.taskGroups.push({
+          name: this.newGroupName.trim(),
+          collapsed: false,
+          todos: { notDone: [], done: [] }
+        });
+        this.saveTaskGroups();
+        this.showAddGroupModal = false;
+        this.newGroupName = '';
+      }
+    },
+
+    removeGroup(index) {
+      if (confirm('Are you sure you want to delete this group?')) {
+        this.taskGroups.splice(index, 1);
+        this.saveTaskGroups();
+      }
+    },
+
+    toggleGroupVisibility(index) {
+      this.taskGroups[index].collapsed = !this.taskGroups[index].collapsed;
+      this.saveTaskGroups();
+    },
+
+    addTask(groupIndex) {
+      const task = prompt('Enter your task:');
+      if (task && task.trim()) {
+        this.taskGroups[groupIndex].todos.notDone.push(task.trim());
+        this.saveTaskGroups();
+      }
+    },
+
+    markAsDone(groupIndex, taskIndex) {
+      const task = this.taskGroups[groupIndex].todos.notDone[taskIndex];
+      this.taskGroups[groupIndex].todos.notDone.splice(taskIndex, 1);
+      this.taskGroups[groupIndex].todos.done.push(task);
+      this.saveTaskGroups();
+    },
+
+    deleteTask(groupIndex, taskIndex) {
+      this.taskGroups[groupIndex].todos.done.splice(taskIndex, 1);
+      this.saveTaskGroups();
+    },
+
+    restoreTask(groupIndex, taskIndex) {
+      const task = this.taskGroups[groupIndex].todos.done[taskIndex];
+      this.taskGroups[groupIndex].todos.done.splice(taskIndex, 1);
+      this.taskGroups[groupIndex].todos.notDone.push(task);
+      this.saveTaskGroups();
+    },
+
+    checkServer() {
       const xhr = new XMLHttpRequest();
       xhr.open('GET', 'https://httpbin.org/get');
       xhr.onload = () => {
-        console.log('xhr loaded, status:', xhr.status);
-        if (xhr.status === 200) {
-          this.xhrResult = 'Test server is active';
-        } else {
-          this.xhrResult = `Error! Status: ${xhr.status}`;
-        }
+        this.xhrResult = xhr.status === 200 
+          ? 'Test server is active' 
+          : `Error! Status: ${xhr.status}`;
       };
       xhr.onerror = () => {
-        console.log('xhr error');
         this.xhrResult = 'Request error (check your connection)';
       };
       xhr.send();
-    },
-
-    // TASKS MANAGEMENT METHODS
-    saveUserData() {
-      localStorage.setItem(this.currentUser, JSON.stringify(this.userData));
-    },
-    markAsDone(index) {
-      const task = this.notDone[index];
-      this.userData.todos.notDone.splice(index, 1);
-      this.userData.todos.done.push(task);
-      this.saveUserData();
-    },
-    deleteTask(index) {
-      this.userData.todos.done.splice(index, 1);
-      this.saveUserData();
-    },
-    restoreTask(index) {
-      const task = this.done[index];
-      this.userData.todos.done.splice(index, 1);
-      this.userData.todos.notDone.push(task);
-      this.saveUserData();
-    },
-    addTask() {
-      const task = prompt('Enter your task:');
-      if (task && task.trim()) {
-        this.userData.todos.notDone.push(task.trim());
-        this.saveUserData();
-      }
-    },
-  },
+    }
+  }
 };
 </script>
