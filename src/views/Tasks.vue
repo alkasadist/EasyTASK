@@ -6,7 +6,7 @@
         <!-- Кнопка добавления новой группы -->
         <button v-if="!showAddGroupInput"
           @click="showAddGroupInput = true"
-          class="flex items-center mb-6 text-white px-4 py-2 rounded-lg 
+          class="flex items-center mb-6 text-white px-4 py-2 rounded-lg shadow-md
           bg-indigo-500 hover:bg-indigo-600">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
@@ -93,7 +93,7 @@
               <!-- Кнопка добавления задачи -->
               <button
                 @click="addTask(groupIndex)"
-                class="flex items-center text-white px-4 py-2 rounded-lg 
+                class="flex items-center text-white px-4 py-2 rounded-lg shadow-md
                 bg-indigo-500 hover:bg-indigo-600 mt-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
