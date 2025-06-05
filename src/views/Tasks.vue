@@ -4,30 +4,34 @@
       <div class="min-h-screen max-w-4xl mx-auto px-4 sm:py-10">
 
         <!-- Кнопка добавления новой группы -->
-        <button
-          @click="showAddGroupModal = true"
-          class="flex items-center mb-6 text-white px-4 py-2 rounded 
-          bg-indigo-600 hover:bg-indigo-700">
+        <button v-if="!showAddGroupInput"
+          @click="showAddGroupInput = true"
+          class="flex items-center mb-6 text-white px-4 py-2 rounded-lg 
+          bg-indigo-500 hover:bg-indigo-600">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
           </svg>
-          Add Group
+          New Group
         </button>
 
-        <!-- Модальное окно для добавления группы -->
-        <div v-if="showAddGroupModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div class="bg-white p-6 rounded-lg max-w-sm w-full">
-            <h3 class="text-lg font-medium mb-4">New Task Group</h3>
-            <input 
-              v-model="newGroupName"
-              type="text" 
-              placeholder="Group name"
-              class="border p-2 w-full mb-4"
-              @keyup.enter="addNewGroup">
-            <div class="flex justify-end space-x-2">
-              <button @click="showAddGroupModal = false" class="px-4 py-2 border rounded">Cancel</button>
-              <button @click="addNewGroup" class="px-4 py-2 bg-indigo-500 text-white rounded">Add</button>
-            </div>
+        <!-- Инпут для добавления группы -->
+        <div v-if="showAddGroupInput" class="py-5 rounded-lg max-w-sm">
+          <input 
+            v-model="newGroupName"
+            type="text" 
+            placeholder="New group name"
+            class="border p-2 w-full mb-4 rounded-lg"
+            @keyup.enter="addNewGroup">
+          <div class="flex justify-end space-x-2">
+            <button @click="showAddGroupInput = false" class="rounded-lg px-3 py-1
+                text-gray-800 hover:text-red-600
+                bg-green-50 
+                border-1 border-gray-800">
+              Cancel
+            </button>
+            <button @click="addNewGroup" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg">
+              Add
+            </button>
           </div>
         </div>
 
@@ -45,7 +49,7 @@
             <div class="flex space-x-2">
               <button 
                 @click="toggleGroupVisibility(groupIndex)"
-                class="text-gray-600 p-2 rounded-md 
+                class="text-gray-600 p-2 rounded-lg 
                 hover:text-gray-700 hover:bg-gray-200 focus:outline-none"
                 :aria-expanded="!group.collapsed">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -55,7 +59,7 @@
               </button>
               <button
                 @click="removeGroup(groupIndex)"
-                class="text-gray-600 p-2 rounded-md 
+                class="text-gray-600 p-2 rounded-lg 
                 hover:text-red-600 hover:bg-gray-200 focus:outline-none"
                 title="Delete group">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6" viewBox="0 0 20 20" fill="currentColor">
@@ -72,12 +76,12 @@
               <li
                 v-for="(task, index) in group.todos.notDone"
                 :key="'notdone-'+groupIndex+'-'+index"
-                class="flex justify-between items-center bg-white text-gray-800 p-4 rounded shadow">
+                class="flex justify-between items-center bg-white text-gray-800 p-4 rounded-lg shadow">
                 <span>{{ task }}</span>
                 <div class="flex space-x-2">
                   <button
                     @click="markAsDone(groupIndex, index)"
-                    class="p-2 rounded-md text-green-600 hover:bg-green-100"
+                    class="p-2 rounded-lg text-green-600 hover:bg-green-100"
                     title="Mark as done">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -89,24 +93,24 @@
               <!-- Кнопка добавления задачи -->
               <button
                 @click="addTask(groupIndex)"
-                class="flex items-center text-white px-4 py-2 rounded 
-                bg-blue-600 hover:bg-blue-700 mt-4">
+                class="flex items-center text-white px-4 py-2 rounded-lg 
+                bg-indigo-500 hover:bg-indigo-600 mt-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                 </svg>
-                Add Task
+                New Task
               </button>
 
               <!-- Выполненные задачи -->
               <li
                 v-for="(task, index) in group.todos.done"
                 :key="'done-'+groupIndex+'-'+index"
-                class="flex justify-between items-center bg-white p-4 rounded shadow">
+                class="flex justify-between items-center bg-white p-4 rounded-lg shadow">
                 <span class="line-through text-gray-400">{{ task }}</span>
                 <div class="flex space-x-2">
                   <button
                     @click="restoreTask(groupIndex, index)"
-                    class="p-2 rounded-md text-blue-600 hover:bg-blue-100"
+                    class="p-2 rounded-lg text-blue-600 hover:bg-blue-100"
                     title="Restore task">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M7.707 3.293a1 1 0 010 1.414L5.414 7H11a7 7 0 017 7v2a1 1 0 11-2 0v-2a5 5 0 00-5-5H5.414l2.293 2.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -114,7 +118,7 @@
                   </button>
                   <button
                     @click="deleteTask(groupIndex, index)"
-                    class="p-2 rounded-md text-red-600 hover:bg-red-100"
+                    class="p-2 rounded-lg text-red-600 hover:bg-red-100"
                     title="Delete task">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -151,7 +155,7 @@ export default {
     return {
       currentUser: null,
       taskGroups: [],
-      showAddGroupModal: false,
+      showAddGroupInput: false,
       newGroupName: '',
       taskTitle: '',
       taskDescription: '',
@@ -207,16 +211,14 @@ export default {
           todos: { notDone: [], done: [] }
         });
         this.saveTaskGroups();
-        this.showAddGroupModal = false;
+        this.showAddGroupInput = false;
         this.newGroupName = '';
       }
     },
 
     removeGroup(index) {
-      if (confirm('Are you sure you want to delete this group?')) {
         this.taskGroups.splice(index, 1);
         this.saveTaskGroups();
-      }
     },
 
     toggleGroupVisibility(index) {
