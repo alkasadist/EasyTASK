@@ -5,6 +5,7 @@ import Faq from './views/Faq.vue'
 import Login from './views/Login.vue'
 import Registration from './views/Registration.vue'
 import Tasks from './views/Tasks.vue'
+import UserProfile from './views/UserProfile.vue'
 
 const routes = [
   { path: '/', component: Index },
@@ -13,6 +14,7 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/registration', component: Registration },
   { path: '/tasks', component: Tasks },
+  { path: '/profile', component: UserProfile }
 ]
 
 const router = createRouter({

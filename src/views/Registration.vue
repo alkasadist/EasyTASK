@@ -58,14 +58,21 @@ export default {
     }
   },
   methods: {
-    register() {
-      if (this.username && this.password) {
-        localStorage.setItem('currentUser', this.username)
-        this.$router.push('/tasks')
-      } else {
-        alert('Registration error')
-      }
+  register() {
+    if (this.username && this.password) {
+      localStorage.setItem('currentUser', this.username);
+
+      localStorage.setItem(`user_${this.username}`, JSON.stringify({
+        email: '',
+        phone: '',
+        bio: '',
+        photo: ''
+      }));
+      this.$router.push('/tasks');
+    } else {
+      alert('Registration error');
     }
   }
+}
 }
 </script>
