@@ -2,8 +2,7 @@
   <div class="bg-green-50">
     <header>
       <div class="w-full container mx-auto px-4 lg:px-6">
-        <nav class="px-4 lg:px-6 py-2.5
-        bg-green-50 border-gray-200">
+        <nav class="px-4 lg:px-6 py-2.5 bg-green-50 border-gray-200">
           <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <router-link
               :to="isLoggedIn ? '/tasks' : '/'"
@@ -11,8 +10,14 @@
                text-green-600 hover:text-green-700">
               EasyTASK
             </router-link>
-
+            
             <div v-if="isLoggedIn" class="flex items-center lg:order-2">
+              <router-link to="/profile" class="flex items-center mr-4">
+                <img 
+                  :src="userAvatar" 
+                  alt="User avatar"
+                  class="w-8 h-8 rounded-full object-cover border-2 border-green-600">
+              </router-link>
               <span class="text-gray-800 font-medium text-sm px-4">
                 {{ userName }}
               </span>
@@ -96,6 +101,16 @@ export default {
       type: String,
       default: "",
     },
+  },
+  computed: {
+    userAvatar() {
+      const currentUser = localStorage.getItem('currentUser');
+      if (currentUser) {
+        const userData = JSON.parse(localStorage.getItem(`user_${currentUser}`)) || {};
+        return userData.photo || 'https://via.placeholder.com/150';
+      }
+      return 'https://via.placeholder.com/150';
+    }
   },
 };
 </script>
