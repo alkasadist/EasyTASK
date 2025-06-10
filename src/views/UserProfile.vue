@@ -25,39 +25,54 @@
           
           <div class="md:w-2/3 p-6">
             <div class="mb-6">
-              <h2 class="text-2xl font-semibold text-gray-800 mb-2">Personal Information</h2>
+              <h2 class="text-2xl font-semibold text-gray-800 mb-2">
+                Personal Information
+              </h2>
               <div class="space-y-4">
+                
                 <div>
-                  <label class="block text-gray-700 text-sm font-medium mb-1">Username</label>
+                  <label class="block text-gray-700 text-sm font-medium mb-1">
+                    Username
+                  </label>
                   <input 
                     v-model="user.username"
                     type="text"
                     class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
                 </div>
+                
                 <div>
-                  <label class="block text-gray-700 text-sm font-medium mb-1">Email</label>
+                  <label class="block text-gray-700 text-sm font-medium mb-1">
+                    Email
+                  </label>
                   <input 
                     v-model="user.email"
                     type="email"
                     class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
                 </div>
+                
                 <div>
-                  <label class="block text-gray-700 text-sm font-medium mb-1">Phone</label>
+                  <label class="block text-gray-700 text-sm font-medium mb-1">
+                    Phone
+                  </label>
                   <input 
                     v-model="user.phone"
                     type="tel"
                     class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
                 </div>
+                
+                <div>
+                  <label class="block text-gray-700 text-sm font-medium mb-1">
+                    Bio
+                  </label>
+                  <textarea 
+                    v-model="user.bio"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                    rows="3"
+                    placeholder="Tell something about yourself...">
+                  </textarea>
+                </div>
+
               </div>
-            </div>
-            
-            <div class="mb-6">
-              <h2 class="text-2xl font-semibold text-gray-800 mb-2">About</h2>
-              <textarea 
-                v-model="user.bio"
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-                rows="3"
-                placeholder="Tell something about yourself..."></textarea>
             </div>
             
             <button 
@@ -65,6 +80,7 @@
               class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">
               Save Changes
             </button>
+            
           </div>
         </div>
       </div>
@@ -120,13 +136,14 @@ export default {
       const currentUser = localStorage.getItem('currentUser');
       if (currentUser) {
         const userData = {
+          username: this.user.username,
           email: this.user.email,
           phone: this.user.phone,
           bio: this.user.bio,
           photo: this.user.photo
         };
         localStorage.setItem(`user_${currentUser}`, JSON.stringify(userData));
-        alert('Profile saved successfully!');
+        // alert('Profile saved successfully!');
       }
     }
   }
