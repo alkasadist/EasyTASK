@@ -107,9 +107,22 @@ export default {
       const currentUser = localStorage.getItem('currentUser');
       if (currentUser) {
         const userData = JSON.parse(localStorage.getItem(`user_${currentUser}`)) || {};
-        return userData.photo || 'https://via.placeholder.com/150';
+        // Возвращаем аватар пользователя или стандартное изображение
+        return userData.photo || this.getDefaultAvatar();
       }
-      return 'https://via.placeholder.com/150';
+      return this.getDefaultAvatar();
+    }
+  },
+  methods: {
+    getDefaultAvatar() {
+      // Можно использовать встроенный SVG или ссылку на изображение
+      // Вот пример SVG-аватара с инициалами (если есть имя пользователя)
+      if (this.userName) {
+        const initials = this.userName.split(' ').map(n => n[0]).join('').toUpperCase();
+        return `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%234CAF50'/><text x='50%' y='50%' font-size='40' fill='white' text-anchor='middle' dy='.3em'>${initials}</text></svg>`;
+      }
+      // Или просто зеленый круг, если имени нет
+      return `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%234CAF50'/></svg>`;
     }
   },
 };
