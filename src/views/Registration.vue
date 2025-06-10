@@ -61,7 +61,7 @@ export default {
   register() {
     if (this.username && this.password) {
       localStorage.setItem('currentUser', this.username);
-      // Сохраняем базовую информацию о пользователе
+
       localStorage.setItem(`user_${this.username}`, JSON.stringify({
         email: '',
         phone: '',

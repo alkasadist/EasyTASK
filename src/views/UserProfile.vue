@@ -1,7 +1,9 @@
 <template>
   <div class="bg-green-50 min-h-screen py-10">
     <div class="container mx-auto px-4 lg:px-6 max-w-4xl">
-      <h1 class="text-4xl font-bold text-gray-900 mb-8">User Profile</h1>
+      <h1 class="text-4xl font-bold text-gray-900 mb-8">
+        User Profile
+      </h1>
       
       <div class="bg-white rounded-lg shadow-lg overflow-hidden">
         <div class="md:flex">
@@ -34,10 +36,9 @@
                   <label class="block text-gray-700 text-sm font-medium mb-1">
                     Username
                   </label>
-                  <input 
-                    v-model="user.username"
-                    type="text"
-                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
+                  <div class="w-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-600">
+                    {{ user.username }}
+                  </div>
                 </div>
                 
                 <div>
@@ -143,7 +144,6 @@ export default {
           photo: this.user.photo
         };
         localStorage.setItem(`user_${currentUser}`, JSON.stringify(userData));
-        // alert('Profile saved successfully!');
       }
     }
   }
